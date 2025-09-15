@@ -1,0 +1,30 @@
+-- select last_name || q'[s Annual Salary]' || salary || ' Annual salary is ' || salary * (salary * commission_pct) as "Annual Salary", salary * commission_pct as "COMMISION" from employees;
+
+-- select last_name || 'is a' || job_id as "Employee Details" from employees;
+
+-- select last_name || '''s Salary is ' || salary || ' Annual salary is ' || salary * (salary * commission_pct) as "Annual Salary", salary * commission_pct as "COMMISION" from employees;
+
+-- select last_name, salary from employees where salary between 5000 and 8000;
+-- select last_name, salary from employees where 2000 <= salary and salary >= 5000;
+
+-- select first_name from employees where first_name like 'S%'; 
+-- select first_name from employees where first_name like 's%'; first letter capital 
+-- select first_name from employees where first_name like '__s%';
+-- select first_name from employees where first_name like '_s%';
+
+-- select last_name, job_id, salary from employees where job_id = 'sa_rep' or job_id = 'ad_pres' and salary > 15000; MUST BE CAPITAL 
+-- select last_name, job_id, salary from employees where (job_id = 'SA_REP' or job_id = 'AD_PRES') and salary > 15000;
+-- select last_name, job_id, salary from employees;
+
+-- select last_name, job_id, department_id, hire_date from employees order by hire_date;
+-- select last_name, job_id, department_id, hire_date from employees order by hire_date asc;
+-- select last_name, job_id, department_id, hire_date from employees order by hire_date desc;
+
+-- select last_name, job_id, department_id, hire_date from employees order by department_id asc, job_id desc;
+
+-- select employee_id, last_name, salary, department_id from employees where employee_id = &employee_number;
+
+-- select employee_id, last_name, &column_name from employees where &con order by &oder;
+-- select lpad(salary, 10, '-') from employees;
+
+-- select round(45.96, -1) from dual;

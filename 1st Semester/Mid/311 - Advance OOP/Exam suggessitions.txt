@@ -1,0 +1,12 @@
+25 marks - 1hr 10min
+OOP Features - Explain
+Procedural programming vs OOP
+Overriding vs overloading
+Encapsulation vs abstraction
+Abstract class vs interface
+
+Establish relationship among classes - IS A, HAS A
+Code error with this/super keywords
+Code output with try/catch/finally
+Find problems in code - based on OOP concepts
+Abstract class vs interface

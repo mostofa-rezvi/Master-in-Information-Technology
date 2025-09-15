@@ -1,0 +1,10 @@
+Milk,Bread,Diapers
+Bread,Butter,Beer,Lotus
+Milk,Bread,Butter,Coke
+Milk,Bread,Diapers,Coke
+Bread,Milk,Diapers
+Milk,Coke
+Bread,Butter
+Milk,Bread,Diapers,Beer
+Milk,Bread,Butter
+Bread,Coke,Diapers

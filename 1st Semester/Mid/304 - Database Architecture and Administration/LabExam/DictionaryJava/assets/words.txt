@@ -1,0 +1,482 @@
+ability,noun,Possession of the means or skill to do something.
+abject,adjective,Experienced or present to the maximum degree.
+ablaze,adjective,Burning fiercely or brightly.
+abnormal,adjective,Deviating from what is normal or usual, typically in a way that is undesirable or worrying.
+aboard,adverb,On, onto, or into a ship, train, or other vehicle.
+abolish,verb,Formally put an end to (a system, practice, or institution).
+abominable,adjective,Causing moral revulsion.
+aboriginal,adjective,Inhabiting or existing in a land from the earliest times or from before the arrival of colonists.
+abort,verb,Carry out or undergo an abortion.
+abortive,adjective,Failing to produce the intended result; unsuccessful.
+abound,verb,Exist in large numbers or amounts.
+about,preposition,On the subject of; concerning.
+above,preposition,At a higher level or layer than.
+abrasive,adjective,Capable of polishing or cleaning a hard surface by rubbing or grinding.
+abreast,adverb,Side-by-side and facing the same way.
+abridge,verb,Shorten (a book, movie, or speech) without losing the sense.
+abroad,adverb,In or to a foreign country or countries.
+abrogate,verb,Repeal or do away with (a law, right, or formal agreement).
+abrupt,adjective,Sudden and unexpected.
+abscess,noun,A swollen area within body tissue, containing an accumulation of pus.
+abscond,verb,Leave hurriedly and secretly, typically to escape from custody or avoid arrest.
+absent,adjective,Not present in a place, at an occasion, or in a group.
+absolute,adjective,Not qualified or diminished in any way; total.
+absolve,verb,Declare (someone) free from guilt, obligation, or punishment.
+absorb,verb,Take in or soak up (energy, liquid, or other substance) by chemical or physical action.
+abstain,verb,Restrain oneself from doing or enjoying something.
+abstemious,adjective,Not self-indulgent, especially when eating and drinking.
+abstract,adjective,Existing in thought or as an idea but not having a physical or concrete existence.
+abstruse,adjective,Difficult to understand; obscure.
+absurd,adjective,Wildly unreasonable, illogical, or inappropriate.
+abundance,noun,A very large quantity of something.
+abundant,adjective,Existing or available in large quantities; plentiful.
+abuse,noun,The improper use of something.
+abyss,noun,A deep or seemingly bottomless chasm.
+academic,adjective,Relating to education and scholarship.
+academy,noun,A place of study or training in a special field.
+accede,verb,Agree to a demand, request, or treaty.
+accelerate,verb,Begin to move more quickly.
+accent,noun,A distinctive mode of pronunciation of a language, especially one associated with a particular nation, locality, or social class.
+accept,verb,To take (something offered) willingly.
+access,noun,The means or opportunity to approach or enter a place.
+accessible,adjective,Able to be reached or entered.
+accessory,noun,A thing which can be added to something else in order to make it more useful, versatile, or attractive.
+accident,noun,An unfortunate incident that happens unexpectedly and unintentionally, typically resulting in damage or injury.
+acclaim,verb,Praise enthusiastically and publicly.
+accommodate,verb,Provide lodging or sufficient space for.
+accompany,verb,Go somewhere with (someone) as a companion or escort.
+accomplice,noun,A person who helps another commit a crime.
+accomplish,verb,Achieve or complete successfully.
+accord,noun,An official agreement or treaty.
+according,adverb,As stated in or by (a report, book, or other source).
+account,noun,A report or description of an event or experience.
+accountable,adjective,Required or expected to justify actions or decisions; responsible.
+accumulate,verb,Gather together or acquire an increasing number or quantity of.
+accurate,adjective,Correct in all details; exact.
+accuse,verb,Charge (someone) with an offense or crime.
+accustom,verb,Make (someone or something) familiar with something; habituate.
+achieve,verb,Successfully bring about or reach (an objective or desired result) by effort, skill, or courage.
+acid,noun,A chemical substance that neutralizes alkalis, dissolves some metals, and turns litmus red; typically, a corrosive or sour-tasting liquid of this kind.
+acknowledge,verb,Accept or admit the existence or truth of.
+acme,noun,The point at which something is at its best or most highly developed.
+acquaint,verb,Make someone aware of or familiar with.
+acquiesce,verb,Accept something reluctantly but without protest.
+acquire,verb,Buy or obtain (an asset or object) for oneself.
+acquit,verb,Free (someone) from a criminal charge by a verdict of not guilty.
+acre,noun,A unit of land area equal to 4,840 square yards (0.405 hectare).
+acrid,adjective,Having an irritatingly strong and unpleasant taste or smell.
+acrimony,noun,Bitterness or ill feeling.
+act,noun,A thing done; a deed.
+action,noun,The fact or process of doing something, typically to achieve an aim.
+activate,verb,Make (something) active or operative.
+active,adjective,Engaging or ready to engage in physically energetic pursuits.
+activist,noun,A person who campaigns for some kind of social or political change.
+activity,noun,The condition in which things are happening or being done.
+actor,noun,A person whose profession is acting on the stage, in films, or on television.
+actual,adjective,Existing in fact; real.
+acumen,noun,The ability to make good judgments and quick decisions, typically in a particular domain.
+acute,adjective,Having or showing a perceptive understanding or insight; shrewd.
+adage,noun,A proverb or short statement expressing a general truth.
+adamant,adjective,Refusing to be persuaded or to change one's mind.
+adapt,verb,Make (something) suitable for a new use or purpose; modify.
+add,verb,Join (something) to something else so as to increase the size, number, or amount.
+address,noun,The particulars of the place where someone lives or an organization is situated.
+adept,adjective,Very proficient or skillful in something.
+adequate,adjective,Satisfactory or acceptable in quality or quantity.
+adhere,verb,Stick fast to (a surface or substance).
+adherent,noun,Someone who supports a particular party, person, or set of ideas.
+adieu,exclamation,Farewell!
+adjacent,adjective,Next to or adjoining something else.
+adjourn,verb,Break off (a meeting, legal case, or game) with the intention of resuming it later.
+adjunct,noun,A thing added to something else but not essential to it.
+adjust,verb,Alter or move (something) slightly in order to achieve the desired fit, appearance, or result.
+administer,verb,Manage and be responsible for the running of (a business, organization, etc.).
+admirable,adjective,Deserving praise.
+admiration,noun,Respect and warm approval.
+admire,verb,Regard with respect or warm approval.
+admission,noun,The process or fact of entering or being allowed to enter a place or organization.
+admit,verb,Confess to be true or to be the case.
+admonish,verb,Warn or reprimand someone firmly.
+ado,noun,Trouble or fuss.
+adolescent,noun,A young person who is developing from a child into an adult.
+adopt,verb,Take (a child) legally and bring it up as one's own.
+adorable,adjective,Inspiring great affection; delightful.
+adore,verb,Love and respect (someone) deeply.
+adorn,verb,Decorate or add beauty to; enhance the appearance of.
+adroit,adjective,Clever or skillful in using the hands or mind.
+adulation,noun,Excessive admiration or praise.
+adult,noun,A person who is fully grown or developed.
+advance,verb,Move forward in a purposeful way.
+advantage,noun,A condition or circumstance that puts one in a favorable or superior position.
+advent,noun,The arrival of a notable person, thing, or event.
+adventurous,adjective,Willing to take risks or to try out new methods, ideas, or experiences.
+adversary,noun,One's opponent in a contest, conflict, or dispute.
+adverse,adjective,Preventing success or development; harmful; unfavorable.
+adversity,noun,Difficulties; misfortune.
+advertise,verb,Describe or present (a product, service, or event) in a public medium with the aim of inducing people to buy or use it.
+advice,noun,Guidance or recommendations concerning prudent future action, typically given by someone wise or expert.
+advise,verb,Offer suggestions about the best course of action to someone.
+advocate,noun,A person who publicly supports or recommends a particular cause or policy.
+aerial,adjective,Existing, happening, or operating in the air.
+aerobic,adjective,Relating to, involving, or requiring free oxygen.
+aesthetic,adjective,Concerned with beauty or the appreciation of beauty.
+affable,adjective,Friendly, good-natured, or easy to talk to.
+affect,verb,Have an effect on; make a difference to.
+affection,noun,A gentle feeling of fondness or liking.
+affidavit,noun,A written statement confirmed by oath or affirmation, for use as evidence in court.
+affiliate,verb,Officially attach or connect (a subsidiary group or a person) to an organization.
+affinity,noun,A spontaneous or natural liking or sympathy for someone or something.
+affirm,verb,State publicly that something is true.
+affirmative,adjective,Agreeing with or consenting to a statement or request.
+afflict,verb,Cause pain or suffering to; affect or trouble.
+affluent,adjective,Having a great deal of money; wealthy.
+afford,verb,Have enough money to pay for.
+affront,noun,An action or remark that causes outrage or offense.
+afloat,adverb,Floating in water.
+afoot,adverb,In preparation or progress; happening or beginning to happen.
+afraid,adjective,Feeling fear or anxiety; frightened.
+after,preposition,In the time following (an event or another period of time).
+aftermath,noun,The consequences or after-effects of a significant unpleasant event.
+again,adverb,Another time; once more.
+against,preposition,In opposition to.
+age,noun,The length of time that a person has lived or a thing has existed.
+agency,noun,A business or organization providing a particular service on behalf of another.
+agenda,noun,A list of items to be discussed at a formal meeting.
+agent,noun,A person who acts on behalf of another person or group.
+aggravate,verb,Make (a problem, injury, or offense) worse or more serious.
+aggregate,noun,A whole formed by combining several separate elements.
+aggression,noun,Hostile or violent behavior or attitudes toward another; readiness to attack or confront.
+aggressive,adjective,Ready or likely to attack or confront; characterized by aggression.
+aggrieved,adjective,Feeling resentment at having been unfairly treated.
+agile,adjective,Able to move quickly and easily.
+agitate,verb,Make (someone) troubled or nervous.
+agnostic,noun,A person who believes that nothing is known or can be known of the existence or nature of God or of anything beyond material phenomena.
+ago,adverb,Before the present; in the past.
+agony,noun,Extreme physical or mental suffering.
+agree,verb,Have the same opinion about something; concur.
+agreeable,adjective,Enjoyable and pleasurable; pleasant.
+agreement,noun,Harmony or accordance in opinion or feeling.
+agriculture,noun,The science or practice of farming, including cultivation of the soil for the growing of crops and the rearing of animals to provide food, wool, and other products.
+ahead,adverb,Further forward in space; in the line of one's sight.
+aid,noun,Help, typically of a practical nature.
+ailment,noun,An illness, typically a minor one.
+aim,noun,A purpose or intention; a desired outcome.
+air,noun,The invisible gaseous substance surrounding the earth, a mixture mainly of oxygen and nitrogen.
+aisle,noun,A passage between rows of seats in a building such as a church or theatre, or in a train, aircraft, or supermarket.
+ajar,adjective,(Of a door or window) slightly open.
+akin,adjective,Of similar character.
+alacrity,noun,Brisk and cheerful readiness.
+alarm,noun,An anxious awareness of danger.
+alas,exclamation,An expression of grief, pity, or concern.
+albeit,conjunction,Although.
+alcove,noun,A recess in the wall of a room or of a garden.
+alert,adjective,In a state of preparedness for action or danger.
+alien,adjective,Belonging to a foreign country or nation.
+alienate,verb,Cause (someone) to feel isolated or estranged.
+alight,verb,(Of a bird) descend from the air and settle.
+align,verb,Place or arrange (things) in a straight line.
+alike,adjective,Similar to each other.
+alive,adjective,Of a person, animal, or plant) living; not dead.
+all,determiner,The whole extent or quantity of.
+allege,verb,Claim or assert that someone has done something illegal or wrong, typically without proof that this is the case.
+allegiance,noun,Loyalty or commitment of a subordinate to a superior or of an individual to a group or cause.
+allegory,noun,A story, poem, or picture that can be interpreted to reveal a hidden meaning, typically a moral or political one.
+alleviate,verb,Make (suffering, deficiency, or a problem) less severe.
+alley,noun,A narrow passageway, especially one between buildings.
+alliance,noun,A formal agreement or treaty between two or more nations to cooperate for specific purposes.
+alligator,noun,A large reptile with a long body, short legs, and a long, flat snout, native to America and China.
+allocate,verb,Distribute (resources or duties) for a particular purpose.
+allot,verb,Give or apportion (something) to someone as a share or task.
+allow,verb,Let (someone) have or do something.
+allowance,noun,The regular amount of money paid to someone for a particular purpose.
+allude,verb,Hint at or refer to indirectly.
+allure,verb,The quality of being powerfully and mysteriously attractive or fascinating.
+ally,noun,A state formally cooperating with another for a military or other purpose.
+almost,adverb,Very nearly; all but.
+alone,adjective,Having no one else present.
+aloof,adjective,Not friendly or forthcoming; cool and distant.
+aloud,adverb,Audibly; not silently or in a whisper.
+alphabet,noun,A set of letters or symbols in a fixed order, used for writing a language.
+already,adverb,Before or by now or the time in question.
+also,adverb,In addition; too.
+alter,verb,Change or cause to change in character or composition.
+alternate,verb,Occur by turns repeatedly.
+although,conjunction,In spite of the fact that; even though.
+altitude,noun,The height of an object or point in relation to sea level or ground level.
+altogether,adverb,Completely; entirely.
+altruism,noun,Disinterested and selfless concern for the well-being of others.
+always,adverb,At all times; on all occasions.
+amalgamate,verb,Combine or unite to form one organization or structure.
+amass,verb,Gather together or accumulate (a large amount or number of material or things) over a period of time.
+amateur,noun,A person who engages in a pursuit, especially a sport, on an unpaid rather than a professional basis.
+amaze,verb,Surprise (someone) greatly; fill with wonder.
+ambassador,noun,An accredited diplomat sent by a country as its official representative to a foreign country.
+ambiance,noun,The character and atmosphere of a place.
+ambiguity,noun,The quality of being open to more than one interpretation; inexactness.
+ambiguous,adjective,Open to more than one interpretation; having a double meaning.
+ambition,noun,A strong desire to do or achieve something.
+ambitious,adjective,Having or showing a strong desire and determination to succeed.
+amble,verb,Walk or stroll at a slow, relaxed pace.
+ambulance,noun,A vehicle specially equipped for taking sick or injured people to and from hospitals, especially in emergencies.
+ambush,noun,A surprise attack by people lying in wait in a concealed position.
+ameliorate,verb,Make (something bad or unsatisfactory) better.
+amenable,adjective,Open and responsive to suggestion; easily persuaded or controlled.
+amend,verb,Make minor changes to (a text, piece of legislation, etc.) in order to make it fairer or more accurate, or to improve it.
+amenity,noun,A desirable or useful feature or facility of a building or place.
+amiable,adjective,Having or displaying a friendly and pleasant manner.
+amicable,adjective,Having a spirit of friendliness; without serious disagreement or rancor.
+amid,preposition,Surrounded by; in the middle of.
+amiss,adjective,Not quite right; inappropriate or out of place.
+amnesty,noun,An official pardon for people who have been convicted of political offenses.
+among,preposition,Surrounded by (people or things).
+amoral,adjective,Lacking a moral sense; unconcerned with the rightness or wrongness of something.
+amount,noun,A quantity of something, especially the total of a thing or things in number, size, value, or extent.
+ample,adjective,Enough or more than enough; plentiful.
+amplify,verb,Increase the volume of (sound), especially using an amplifier.
+amputate,verb,Cut off (a limb or other appendage of the body) by surgical operation.
+amulet,noun,An ornament or small piece of jewelry thought to give protection against evil, danger, or disease.
+amuse,verb,Cause someone to find something funny or entertaining.
+anachronism,noun,A thing belonging or appropriate to a period other than that in which it exists, especially a thing that is conspicuously old-fashioned.
+analogous,adjective,Comparable in certain respects, typically in a way which makes clearer the nature of the things compared.
+analogy,noun,A comparison between two things, typically for the purpose of explanation or clarification.
+analyze,verb,Examine methodically and in detail the constitution or structure of (something, especially information), typically for purposes of explanation and interpretation.
+anarchy,noun,A state of disorder due to absence or non-recognition of authority.
+anatomy,noun,The branch of science concerned with the bodily structure of humans, animals, or other living organisms, especially as revealed by dissection and the separation of parts.
+ancestor,noun,A person, typically one more remote than a grandparent, from whom one is descended.
+ancient,adjective,Belonging to the very distant past and no longer in existence.
+ancillary,adjective,Providing necessary support to the primary activities or operation of an organization, system, etc.
+anecdote,noun,A short amusing or interesting story about a real incident or person.
+anemia,noun,A condition in which the blood is deficient in red blood cells, hemoglobin, or total volume.
+anew,adverb,In a new or different and typically more positive way.
+angel,noun,A spiritual being believed to act as an attendant, agent, or messenger of God, or a benevolent celestial being with wings and a halo.
+anger,noun,A strong feeling of annoyance, displeasure, or hostility.
+angle,noun,The space (usually measured in degrees) between two intersecting lines or surfaces at or close to the point where they meet.
+angry,adjective,Feeling or showing strong annoyance, displeasure, or hostility; full of anger.
+anguish,noun,Severe mental or physical pain or suffering.
+animate,verb,Bring to life; give a living appearance to.
+animosity,noun,Strong hostility.
+annals,noun,A record of events year by year.
+annex,verb,Add (territory) to one's own territory by appropriation.
+annihilate,verb,Destroy utterly; obliterate.
+announce,verb,Make a public and typically formal declaration about (something).
+annoy,verb,Make (someone) a little angry; irritate.
+annual,adjective,Occurring once every year.
+annul,verb,Declare (a marriage or other legal contract) invalid.
+anomaly,noun,Something that deviates from what is standard, normal, or expected.
+anonymous,adjective,Not identified by name; of unknown name.
+antagonism,noun,Active hostility or opposition.
+antagonize,verb,Cause (someone) to become hostile.
+antecedent,noun,A thing or event that existed before or logically precedes another.
+antediluvian,adjective,Of or belonging to the time before the biblical Flood.
+anterior,adjective,Nearer the front, especially in the front of the body, or nearer the head or toward the head or front.
+anticipate,verb,Regard as probable; expect or predict.
+antipathy,noun,A deep-seated feeling of dislike; aversion.
+antiquated,adjective,Old-fashioned or outdated.
+antique,noun,An object, piece of furniture, or work of art that is of high quality and considerable age.
+antiseptic,adjective,Relating to or denoting substances that prevent the growth of disease-causing microorganisms.
+antithesis,noun,A person or thing that is the direct opposite of someone or something else.
+anxiety,noun,A feeling of worry, nervousness, or unease, typically about an event or something with an uncertain outcome.
+anxious,adjective,Feeling or showing worry, nervousness, or unease about something with an uncertain outcome.
+any,determiner,Used to refer to one or some indiscriminately of whatever kind.
+apart,adverb,Separated by a distance; at a specified distance from each other.
+apathetic,adjective,Showing or feeling no interest, enthusiasm, or concern.
+apathy,noun,Lack of interest, enthusiasm, or concern.
+ape,noun,A large primate that lacks a tail, including the gorilla, chimpanzee, orangutan, and gibbon.
+aperture,noun,An opening, hole, or gap.
+apex,noun,The top or highest part of something, especially a mountain or a pyramid.
+apiece,adverb,For each one of a group; to or for each.
+aplomb,noun,Self-confidence or assurance, especially when in a demanding situation.
+apocalypse,noun,The complete final destruction of the world, especially as described in the biblical book of Revelation.
+apocryphal,adjective,Of doubtful authenticity, although widely circulated as being true.
+apology,noun,A regretful acknowledgment of an offense or failure.
+apostate,noun,A person who renounces a religious or political belief or principle.
+appall,verb,Greatly dismay or horrify.
+apparatus,noun,A technical equipment or machinery needed for a particular activity or purpose.
+apparel,noun,Clothing.
+apparent,adjective,Clearly visible or understood; obvious.
+apparition,noun,A ghost or ghostlike image of a person.
+appeal,noun,An earnest or urgent request.
+appear,verb,Come into sight; become visible or noticeable.
+appease,verb,Pacify or placate (someone) by acceding to their demands.
+appellation,noun,A name or title.
+append,verb,Add (something) to the end of a written document.
+appendix,noun,A section or table of additional matter at the end of a book or document.
+appetite,noun,A natural desire to satisfy a bodily need, especially for food.
+applaud,verb,Show approval or appreciation by clapping.
+applicable,adjective,Relevant or appropriate.
+applicant,noun,A person who applies for something, typically a job or financial aid.
+application,noun,A formal request to an authority for something.
+apply,verb,Make a formal application or request.
+appoint,verb,Assign a job or role to (someone).
+appraise,verb,Assess the value or quality of.
+appreciable,adjective,Large or important enough to be noticed or regarded as significant.
+appreciate,verb,Recognize the full worth of.
+apprehend,verb,Arrest (someone) for a crime.
+apprehensive,adjective,Anxious or fearful that something bad or unpleasant will happen.
+apprise,verb,Inform or tell (someone).
+approach,verb,Come nearer or nearer to (someone or something) in distance or time.
+approbation,noun,Approval or praise.
+appropriate,adjective,Suitable or proper in the circumstances.
+approve,verb,Officially agree to or accept as satisfactory.
+approximate,adjective,Close to the actual, but not completely accurate or exact.
+apt,adjective,Appropriate or suitable in the circumstances.
+aptitude,noun,A natural ability to do something.
+aquatic,adjective,Relating to water.
+arbitrary,adjective,Based on random choice or personal whim, rather than any reason or system.
+arbitrate,verb,Act as an arbitrator; give an authoritative judgment.
+arc,noun,A part of the circumference of a circle or other curve.
+archaic,adjective,Very old or old-fashioned.
+archetype,noun,A very typical example of a certain person or thing.
+architect,noun,A person who designs buildings and in many cases also supervises their construction.
+archive,noun,A collection of historical documents or records providing information about a place, institution, or group of people.
+ardent,adjective,Enthusiastic or passionate.
+arduous,adjective,Involving or requiring strenuous effort; difficult and tiring.
+area,noun,A region or part of a town, a country, or the world.
+arena,noun,A level area surrounded by seating, in which sports, entertainments, and other public events are held.
+argue,verb,Give reasons or cite evidence in support of an idea, action, or theory, typically with the aim of persuading others to share one's view.
+argument,noun,A reason or set of reasons given with the aim of persuading others that an action or idea is right or wrong.
+arid,adjective,Having little or no rain; too dry or barren to support vegetation.
+arise,verb,Emerge; become apparent.
+aristocracy,noun,The highest class in certain societies, especially those holding hereditary titles or offices.
+arm,noun,Each of the two upper limbs of the human body from the shoulder to the hand.
+armament,noun,Military weapons and equipment.
+armistice,noun,An agreement made by opposing sides in a war to stop fighting for a certain time; a truce.
+army,noun,An organized military force equipped for fighting on land.
+around,preposition,Located or situated on every side of.
+arouse,verb,Evoke or awaken (a feeling, emotion, or response).
+arraign,verb,Call or bring (someone) before a court to answer a criminal charge.
+arrange,verb,Put (things) in a neat, attractive, or required order.
+array,noun,An impressive display or range of a particular type of thing.
+arrears,noun,Money that is owed and should have been paid earlier.
+arrest,verb,Seize (someone) by legal authority and take them into custody.
+arrive,verb,Reach a place at the end of a journey or a stage in a journey.
+arrogance,noun,The quality of having or revealing an exaggerated sense of one's own importance or abilities.
+arrogant,adjective,Having or revealing an exaggerated sense of one's own importance or abilities.
+art,noun,The expression or application of human creative skill and imagination, typically in a visual form such as painting or sculpture, producing works to be appreciated primarily for their beauty or emotional power.
+artery,noun,Any of the muscular-walled tubes forming part of the circulation system by which blood (mainly that which has been oxygenated) is conveyed from the heart to all parts of the body.
+article,noun,A particular item or object.
+articulate,adjective,Having or showing the ability to speak fluently and coherently.
+artifice,noun,Clever or cunning devices or expedients, especially as used to trick or deceive others.
+artificial,adjective,Made or produced by human beings rather than naturally, especially as a copy of something natural.
+ascend,verb,Go up or climb.
+ascertain,verb,Find (something) out for certain; make sure of.
+ascetic,adjective,Characterized by severe self-discipline and abstention from all forms of indulgence, typically for religious reasons.
+ascribe,verb,Attribute something to (a cause, event, or person).
+aseptic,adjective,Free from contamination caused by harmful bacteria, viruses, or other microorganisms.
+ashamed,adjective,Embarrassed or guilty because of one's actions, characteristics, or associations.
+ashore,adverb,To or on the shore.
+aside,adverb,To one side; out of the way.
+ask,verb,Say something in order to obtain an answer or some information.
+asleep,adjective,In a state of sleep.
+aspect,noun,A particular part or feature of something.
+asperity,noun,Harshness of tone or manner.
+aspersions,noun,Attacks on a person's character or reputation.
+aspirant,noun,A person who has ambitions to achieve something, typically to follow a particular career.
+aspire,verb,Direct one's hopes or ambitions toward achieving something.
+assail,verb,Make a concerted or violent attack on.
+assassin,noun,A person who murders an important person for political or religious reasons.
+assault,noun,A physical attack.
+assay,noun,The testing of a metal or ore to determine its ingredients and quality.
+assemble,verb,Gather together in one place for a common purpose.
+assent,noun,The expression of approval or agreement.
+assert,verb,State a fact or belief confidently and forcefully.
+assess,verb,Evaluate or estimate the nature, ability, or quality of.
+asset,noun,A useful or valuable thing, person, or quality.
+assiduous,adjective,Showing great care and perseverance.
+assign,verb,Allocate (a job or duty).
+assimilate,verb,Take in (information, ideas, or culture) and understand fully.
+assist,verb,Help (someone) by doing a share of the work.
+associate,verb,Connect (someone or something) with something else in one's mind.
+assorted,adjective,Of various sorts put together; mixed.
+assuage,verb,Make (an unpleasant feeling) less intense.
+assume,verb,Suppose to be the case, without proof.
+assurance,noun,A positive declaration intended to give confidence; a promise.
+assure,verb,Tell someone something positively to dispel any doubts.
+asteroid,noun,A small rocky body orbiting the sun.
+asthma,noun,A respiratory condition marked by spasms in the bronchi of the lungs, causing difficulty in breathing. It usually results from an allergic reaction or other forms of hypersensitivity.
+astonish,verb,Surprise or impress greatly.
+astound,verb,Shock or greatly surprise.
+astray,adverb,Away from the correct path or direction.
+astringent,adjective,Causing the contraction of body tissues, typically used to stop bleeding from small cuts or to reduce skin oiliness.
+astronomy,noun,The branch of science which deals with celestial objects, space, and the physical universe as a whole.
+astute,adjective,Having or showing an ability to accurately assess situations or people and turn this to one's advantage.
+asunder,adverb,Into pieces.
+asylum,noun,The protection granted by a state to someone who has left their native country as a political refugee.
+atheist,noun,A person who disbelieves or lacks belief in the existence of God or gods.
+athwart,preposition,From side to side; across.
+atlas,noun,A book of maps or charts.
+atmosphere,noun,The envelope of gases surrounding the earth or another planet.
+atom,noun,The basic unit of a chemical element.
+atrocious,adjective,Horrifyingly wicked.
+atrocity,noun,An extremely wicked or cruel act, typically one involving physical violence or injury.
+atrophy,noun,The process of wasting away of body tissue or an organ.
+attach,verb,Join or fasten (something) to something else.
+attack,noun,An aggressive and violent act against a person or place.
+attain,verb,Achieve (something desired, aimed for, or sought).
+attempt,verb,Make an effort to achieve or complete (something difficult).
+attend,verb,Be present at (an event, meeting, or institution).
+attentive,adjective,Paying close attention to something.
+attenuate,verb,Reduce the force, effect, or value of.
+attest,verb,Provide or serve as clear evidence of.
+attic,noun,A space or room inside the roof of a building.
+attire,noun,Clothes, especially fine or formal ones.
+attitude,noun,A settled way of thinking or feeling about something.
+attorney,noun,A person appointed to act for another in business or legal matters.
+attract,verb,Draw by appealing to the emotions or senses.
+attribute,verb,Regard something as being caused by.
+attrition,noun,The action or process of gradually reducing the strength or effectiveness of someone or something through sustained attack or pressure.
+attune,verb,Make receptive or aware.
+atypical,adjective,Not representative of a type, group, or class; abnormal.
+auburn,adjective,Of a reddish-brown color.
+audacious,adjective,Showing a willingness to take surprisingly bold risks.
+audible,adjective,Able to be heard.
+audience,noun,The assembled spectators or listeners at a public event.
+audit,noun,An official inspection of an individual's or organization's accounts, typically by an independent body.
+augment,verb,Make (something) greater by adding to it; increase.
+augury,noun,A sign of what will happen in the future; an omen.
+august,adjective,Respected and impressive.
+aunt,noun,The sister of one's father or mother or the wife of one's uncle.
+aura,noun,The distinctive atmosphere or quality that seems to surround and be generated by a person, thing, or place.
+auspices,noun,With the help or protection of.
+auspicious,adjective,Conducive to success; favorable.
+austere,adjective,Severe or strict in manner, attitude, or appearance.
+authentic,adjective,Of undisputed origin; genuine.
+authenticate,verb,Prove or confirm that something is authentic or genuine.
+author,noun,A writer of a book, article, or report.
+authoritative,adjective,Able to be trusted as being accurate or true; reliable.
+authority,noun,The power or right to give orders, make decisions, and enforce obedience.
+autocracy,noun,A system of government by one person with absolute power.
+autocrat,noun,A ruler who has absolute power.
+autograph,noun,A signature, especially that of a celebrity, written as a memento for an admirer.
+automatic,adjective,Working by itself with little or no direct human control.
+autonomous,adjective,Having the freedom to govern itself or control its own affairs.
+autonomy,noun,The right or condition of self-government.
+auxiliary,adjective,Providing supplementary or additional help and support.
+avail,verb,Use or take advantage of (an opportunity or available resource).
+available,adjective,Able to be used or obtained; at someone's disposal.
+avalanche,noun,A mass of snow, ice, and rocks falling rapidly down a mountainside.
+avarice,noun,Extreme greed for wealth or material gain.
+avenge,verb,Inflict harm in return for (an injury or wrong done to oneself or another).
+avenue,noun,A broad road in a town or city, typically having trees at regular intervals along its sides.
+aver,verb,State or assert to be the case.
+averse,adjective,Having a strong dislike of or opposition to something.
+aversion,noun,A strong dislike or disinclination.
+avert,verb,Turn away (one's eyes or thoughts).
+aviary,noun,A large enclosure for keeping birds.
+avid,adjective,Having or showing a keen interest in or enthusiasm for something.
+avocation,noun,A hobby or minor occupation.
+avoid,verb,Keep away from or stop oneself from doing (something).
+avow,verb,Assert or confess openly.
+await,verb,Wait for (an event).
+awake,adjective,Not asleep.
+awaken,verb,Rouse from sleep.
+award,noun,A prize or other mark of recognition given in honor of an achievement.
+aware,adjective,Having knowledge or perception of a situation or fact.
+away,adverb,To or at a distance from a particular place, person, or thing.
+awe,noun,A feeling of reverential respect mixed with fear or wonder.
+awesome,adjective,Extremely impressive or daunting.
+awful,adjective,Very bad or unpleasant.
+awkward,adjective,Causing difficulty; hard to do or deal with.
+axiom,noun,A statement or proposition which is regarded as being established, accepted, or self-evidently true.
+axis,noun,An imaginary line about which a body rotates or around which an object or arrangement is symmetrically disposed.
+azure,adjective,Bright blue in color like a cloudless sky.

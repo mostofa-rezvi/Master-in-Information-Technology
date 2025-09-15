@@ -1,0 +1,10 @@
+abacus,noun,A frame with rows of wires or grooves along which beads are slid, used for calculating.
+abandon,verb,To cease to support or look after (someone); desert.
+abate,verb,To become less intense or widespread.
+abbey,noun,The building or buildings occupied by a community of monks or nuns.
+abbreviation,noun,A shortened form of a word or phrase.
+abdicate,verb,To renounce one's throne.
+abduct,verb,To take (someone) away illegally by force or deception; kidnap.
+aberration,noun,A departure from what is normal, usual, or expected, typically an unwelcome one.
+abhor,verb,To regard with disgust and hatred.
+abide,verb,To accept or act in accordance with (a rule, decision, or recommendation). 
