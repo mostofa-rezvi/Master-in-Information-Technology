@@ -1,1 +1,3 @@
 https://www.oodesign.com/design-principles/
+
+https://www.freecodecamp.org/news/solid-principles-for-better-software-design/
