@@ -1,0 +1,7 @@
+https://www.neverstopbuilding.com/blog/minimax
+
+https://www.geeksforgeeks.org/dsa/minimax-algorithm-in-game-theory-set-1-introduction/
+
+https://www.geeksforgeeks.org/dsa/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
+
+https://www.neverstopbuilding.com/blog/minimax
