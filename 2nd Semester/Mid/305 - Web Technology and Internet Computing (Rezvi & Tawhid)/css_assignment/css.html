@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .my-button {
+            color: white;
+            font-size: 20px;
+            padding: 5px 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .my-button:hover {
+            background-color: #990505;
+            color: #ffc107;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #bf1515;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a,
+        nav ul li button {
+            display: block;
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover,
+        nav ul li button:hover {
+            background-color: #990505;
+            color: #ffffff;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 160px;
+            background: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            color: #222;
+        }
+
+        .dropdown-content a:hover {
+            background: #5f5f5f;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li a,
+            nav ul li button {
+                text-align: left;
+                padding: 12px;
+            }
+        }
+
+        /* body  */
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        aside,
+        section {
+            background: #fff;
+            padding: 16px;
+        }
+
+        aside h1,
+        section h1 {
+            margin-bottom: 10px;
+            color: #b10a0a;
+            font-size: 1.2rem;
+        }
+
+        aside p,
+        section p {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0px; padding: 0px; border: 0px;">
+    <div style="text-align: center; background-color: #FAF9F6; padding: 10px;">
+        <header>
+            <h1>My Header</h1>
+        </header>
+    </div>
+
+    <div style="margin: 0px; padding: 0px; border: 0px;">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="dropdown">
+                    <button>Dropdown ▾</button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="layout">
+        <aside>
+            <h1>Side</h1>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                It has been the industry's standard dummy text ever since the 1500s.
+            </p>
+        </aside>
+
+        <section>
+            <h1>Main Content</h1>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                It has survived not only five centuries, but also the leap into electronic typesetting.
+            </p>
+            <p>
+                Contrary to popular belief, Lorem Ipsum is not simply random text.
+                It has roots in classical Latin literature from 45 BC, making it over 2000 years old.
+            </p>
+        </section>
+
+        <aside>
+            <h1>Side</h1>
+            <p>
+                Lorem Ipsum has been used as placeholder text in publishing since the 1500s
+                and became popular again with desktop publishing software.
+            </p>
+        </aside>
+    </div>
+
+    <div style="text-align: center; background-color: #FAF9F6; padding: 10px;">
+        <h1>My Footer</h1>
+    </div>
+
+</body>
+
+</html>
