@@ -1,0 +1,195 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+    color: #1b1f3b;
+    font-weight: 700;
+}
+
+.top-header {
+    background: linear-gradient(90deg, #0057b8, #1b1f3b);
+    color: #ffffff;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.top-header .badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.custom-navbar {
+    background-color: #1b1f3b;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+.custom-navbar .navbar-brand .logo-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+}
+.custom-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.custom-navbar .nav-link:hover, .custom-navbar .nav-link.active {
+    color: #ffc300;
+    transform: translateY(-1px);
+}
+.custom-navbar .dropdown-menu {
+    background-color: #1b1f3b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+.custom-navbar .dropdown-menu .dropdown-item {
+    color: rgba(255, 255, 255, 0.9);
+}
+.custom-navbar .dropdown-menu .dropdown-item:hover {
+    background-color: #0057b8;
+    color: #ffffff;
+}
+.custom-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.85%29' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.custom-navbar .navbar-brand {
+    font-weight: bold;
+    color: #1b1f3b;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.custom-navbar .navbar-brand:hover {
+    color: #0057b8;
+}
+.custom-navbar .navbar-brand .custom-navbar-logo {
+    height: 60px;
+    width: auto;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.main-card,
+.side-card {
+    border: none;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.main-card:hover,
+.side-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-link {
+    color: #2c3e50;
+    text-decoration: none;
+    display: block;
+    padding: 0.4rem 0;
+    transition: color 0.2s ease;
+}
+.sidebar-link:hover {
+    color: #0057b8;
+    text-decoration: wavy;
+}
+
+.hover-link:hover {
+    color: #0057b8;
+    text-decoration: underline;
+}
+
+.testimonial {
+    border-left: 4px solid #0057b8;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.testimonial:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-card .card-title {
+    color: #0057b8;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.side-card .card-title {
+    color: #1b1f3b;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #0057b8, #1b1f3b);
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #00448f, #0e101f);
+    transform: translateY(-1px);
+}
+
+main.container {
+    max-width: 1200px;
+}
+
+h1, h5 {
+    letter-spacing: 0.2px;
+}
+
+.card-body {
+    line-height: 1.6;
+}
+
+.site-footer {
+    background-color: #1b1f3b;
+    border-top: 4px solid #ffc300;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+.site-footer h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+.site-footer .footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.site-footer .footer-link:hover {
+    color: #ffc300;
+}
+.site-footer hr {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+.site-footer .navbar-brand {
+    font-weight: bold;
+    color: #1b1f3b;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.site-footer .navbar-brand:hover {
+    color: #0057b8;
+}
+.site-footer .navbar-brand .custom-navbar-logo {
+    height: 100px;
+    width: auto;
+    margin-right: 10px;
+    object-fit: contain;
+}
