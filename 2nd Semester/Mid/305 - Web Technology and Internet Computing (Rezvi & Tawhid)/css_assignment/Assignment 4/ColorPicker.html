@@ -1,99 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalized Greeting & Color Changer</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamic Greeting & Background Customizer</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+            rel="stylesheet">
+        <style>
+        :root {
+            --primary-color: #007bff;
+            --success-color: #28a745;
+            --background-color: #d1d1d1;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             transition: background-color 0.5s ease;
-            color: #333;
         }
 
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
         }
 
         h1 {
-            color: #007bff;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .input-group {
             margin-bottom: 20px;
+            text-align: left;
         }
 
-        label, input, button {
+        label {
             display: block;
-            width: 100%;
-            margin-bottom: 15px;
-            box-sizing: border-box;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 600;
         }
 
-        input[type="text"], input[type="color"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        #color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        #color-hex-value {
+            font-size: 1em;
+            font-weight: 600;
+            color: #555;
+            flex-grow: 1;
         }
 
         input[type="color"] {
-            height: 50px;
-            cursor: pointer;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            padding: 0;
+            border: none;
         }
 
-        button {
-            background-color: #28a745;
+        #actionButton {
+            background-color: var(--success-color);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
         }
 
-        button:hover {
+        #actionButton:hover {
             background-color: #218838;
+            transform: translateY(-2px);
         }
 
         #greeting {
-            margin-top: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #dc3545;
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #greeting.visible {
+            opacity: 1;
         }
     </style>
-  </head>
-  <body>
+    </head>
+    <body>
 
-    <div class="container">
-      <h1>Customize Your Greeting</h1>
+        <div class="container">
+            <img src="iit.jpg" width="370" height="150" alt="">
+            <div class="input-group">
+                <label for="userName">Enter your name:</label>
+                <input type="text" id="userName" placeholder="e.g., Alex"
+                    required>
+            </div>
+            <div class="input-group">
+                <label for="bgColorPicker">Choose a background color:</label>
+                <div class="color-picker-group">
+                    <div id="color-preview"
+                        style="background-color: #0000ff;"></div>
+                    <input type="color" id="bgColorPicker" value="#0000ff">
+                    <span id="color-hex-value">#0000ff</span>
+                </div>
+            </div>
+            <button id="actionButton">Generate Greeting</button>
+            <p id="greeting"></p>
+        </div>
 
-      <label for="userName">Enter your name:</label>
-      <input type="text" id="userName" placeholder="e.g., Alex" required>
-
-      <label for="bgColorPicker">Select a background color:</label>
-      <input type="color" id="bgColorPicker" value="#f0f8ff"> <button
-        id="actionButton">Greet Me & Change Color!</button>
-
-      <p id="greeting"></p>
-    </div>
-
-    <script>
+        <script>
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('userName');
             const colorPicker = document.getElementById('bgColorPicker');
             const actionButton = document.getElementById('actionButton');
             const greetingElement = document.getElementById('greeting');
             const body = document.body;
+            const colorPreview = document.getElementById('color-preview');
+            const colorHexValue = document.getElementById('color-hex-value');
+
+            colorPreview.addEventListener('click', () => {
+                colorPicker.click();
+            });
+
+            colorPicker.addEventListener('input', () => {
+                const selectedColor = colorPicker.value;
+                colorPreview.style.backgroundColor = selectedColor;
+                colorHexValue.textContent = selectedColor;
+            });
 
             actionButton.addEventListener('click', () => {
                 const name = nameInput.value.trim();
@@ -105,11 +194,11 @@
                 }
 
                 body.style.backgroundColor = selectedColor;
-
-                greetingElement.textContent = `Hello, ${name}! Your background is now "${selectedColor}".`;
+                greetingElement.textContent = `Hello, ${name}! Enjoy the new background.`;
+                greetingElement.classList.add('visible');
             });
         });
     </script>
 
-  </body>
+    </body>
 </html>
