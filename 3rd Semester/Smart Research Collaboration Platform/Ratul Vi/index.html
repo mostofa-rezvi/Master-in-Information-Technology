@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NEXIS — System Design Document</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f0f4f8;font-family:'EB Garamond',Georgia,serif;-webkit-font-smoothing:antialiased;color:#1a202c}
+.page{width:210mm;min-height:297mm;margin:0 auto 6mm;padding:16mm 16mm 20mm;background:#ffffff;position:relative;overflow:hidden}
+.land{width:297mm;min-height:210mm;margin:0 auto 6mm;padding:12mm 14mm 16mm;background:#ffffff;position:relative;overflow:hidden}
+@media print{
+  body{background:#ffffff}
+  .page,.land{margin:0;page-break-after:always;box-shadow:none}
+  .page:last-child,.land:last-child{page-break-after:auto}
+  @page p{size:A4 portrait;margin:0}
+  @page l{size:A4 landscape;margin:0}
+  .page{page:p}.land{page:l}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* Typography */
+h1{font-size:52px;font-weight:700;letter-spacing:-1.5px;line-height:1;color:#102a43}
+h2{font-size:18px;font-weight:700;color:#102a43;margin-bottom:4px}
+h3{font-size:13px;font-weight:700;color:#102a43;margin-bottom:6px}
+.mono{font-family:'JetBrains Mono',monospace}
+.small{font-size:9px}.tiny{font-size:7.5px}
+.muted{color:#718096}.light{color:#a0aec0}.dark{color:#1a202c}
+.accent{color:#e85d26}
+.italic{font-style:italic}
+.bold{font-weight:700}
+.center{text-align:center}
+
+/* Page header */
+.ph{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1.5px solid #102a43;padding-bottom:6px;margin-bottom:14px}
+.ph .num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:#a0aec0;margin-right:8px}
+.ph .title{font-size:17px;font-weight:700;color:#102a43}
+.ph .sub{font-size:10px;font-style:italic;color:#718096}
+
+/* Page footer */
+.pf{position:absolute;bottom:10mm;left:16mm;right:16mm;display:flex;justify-content:space-between;border-top:.5px solid #cbd5e0;padding-top:4px;font-family:'JetBrains Mono',monospace;font-size:7px;color:#a0aec0}
+
+/* Cover */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;min-height:297mm;padding:0}
+.cover .top{flex:1;background:repeating-linear-gradient(0deg,transparent,transparent 27px,#cbd5e0 27px,#cbd5e0 28px)}
+.cover .bottom{padding:20mm 18mm;border-top:3px solid #102a43}
+.cover .kicker{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;color:#a0aec0;text-transform:uppercase;margin-bottom:16px}
+.cover .subtitle{font-size:18px;font-style:italic;color:#718096;margin-top:4px;margin-bottom:28px}
+.cover .meta{border:1px solid #cbd5e0;display:grid;grid-template-columns:max-content 1fr;font-size:11px;border-radius:5px;overflow:hidden}
+.cover .meta .k{padding:6px 12px;background:#f0f4f8;border-bottom:1px solid #cbd5e0;border-right:1px solid #cbd5e0;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#718096}
+.cover .meta .v{padding:6px 14px;border-bottom:1px solid #cbd5e0;color:#718096;font-style:italic}
+.toc{margin-top:26px;border-top:1px solid #cbd5e0;padding-top:14px}
+.toc-h{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;color:#a0aec0;text-transform:uppercase;margin-bottom:10px}
+.toc-r{display:flex;align-items:baseline;margin-bottom:6px;font-size:11.5px}
+.toc-n{font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0;width:22px;flex-shrink:0}
+.toc-d{flex:1;border-bottom:1px dotted #cbd5e0;margin:0 6px 2px}
+.toc-s{font-style:italic;color:#a0aec0;font-size:10px}
+
+/* Generic tables */
+table{width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:14px}
+th{text-align:left;padding:5px 8px;border-bottom:1.2px solid #102a43;font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:#718096;font-weight:500}
+td{padding:4px 8px;border-bottom:1px solid #cbd5e0;color:#718096;vertical-align:top}
+td:first-child{color:#1a202c}
+
+/* Section label */
+.sec{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:#102a43;text-transform:uppercase;margin:20px 0 10px}
+.sec:first-child{margin-top:0}
+
+/* Metric boxes */
+.metrics{display:flex;gap:10px;margin:12px 0}
+.mbox{flex:1;border:1px solid #cbd5e0;padding:10px 12px;border-radius:5px;transition:box-shadow 0.2s ease}
+.mbox:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+.mbox .label{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:#a0aec0;margin-bottom:3px}
+.mbox .val{font-size:22px;font-weight:700;color:#2b6cb0;line-height:1.1}
+.mbox .desc{font-size:8.5px;color:#718096;margin-top:2px}
+
+/* Flow diagram (HTML) */
+.flow{display:flex;align-items:stretch;gap:0;margin:10px 0}
+.flow-step{flex:1;border:1px solid #cbd5e0;padding:8px 6px;text-align:center;position:relative;background:#ffffff;border-radius:5px;transition:box-shadow 0.2s ease}
+.flow-step:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+.flow-step.active{border-color:#102a43;background:#f0f4f8}
+.flow-step .snum{font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0;display:block}
+.flow-step .sname{font-size:11px;font-weight:700;display:block;margin:2px 0;color:#102a43}
+.flow-step .sagent{font-size:9px;color:#718096;font-style:italic;display:block}
+.flow-step .stech{font-family:'JetBrains Mono',monospace;font-size:7px;color:#a0aec0;display:block;margin-top:3px}
+.flow-arr{display:flex;align-items:center;font-size:14px;color:#a0aec0;padding:0 2px}
+
+/* Architecture cards */
+.arch-grid{display:grid;gap:8px}
+.agent-card{border:1px solid #cbd5e0;padding:8px 10px;background:#ffffff;border-radius:5px;transition:box-shadow 0.2s ease}
+.agent-card:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+.agent-card .aname{font-size:12px;font-weight:700;margin-bottom:2px;color:#102a43}
+.agent-card .arole{font-size:9px;color:#718096;font-style:italic;margin-bottom:4px}
+.agent-card .atech{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#a0aec0;margin-bottom:4px}
+.agent-card .aio{font-size:8.5px;color:#718096}
+.agent-card .aio .lbl{font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;margin-right:3px}
+.agent-card .aio .lbl.in{color:#2b6cb0}.agent-card .aio .lbl.out{color:#2b6cb0}
+.agent-card .aschema{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#a0aec0;margin-top:4px;padding:4px 6px;background:#f0f4f8;border:1px solid #cbd5e0;border-radius:5px}
+.planned{border-style:solid;opacity:1}
+.fyp-badge{display:none}
+
+/* Step diagram (3-col HTML) */
+.step-grid{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:10px;margin-bottom:10px}
+.step-col{border:1px solid #cbd5e0;padding:10px;border-radius:5px;transition:box-shadow 0.2s ease}
+.step-col:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+.step-col h4{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:#102a43;border-bottom:1px solid #cbd5e0;padding-bottom:4px;margin-bottom:8px}
+.step-col h4.process{color:#2b6cb0;border-color:#2b6cb0}
+.step-col h4.output{color:#2b6cb0;border-color:#2b6cb0}
+.src-card{border:1px solid #cbd5e0;padding:6px 8px;margin-bottom:6px;border-radius:5px;transition:box-shadow 0.2s ease}
+.src-card:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+.src-card .sname{font-size:10.5px;font-weight:600;color:#1a202c}
+.src-card .sdesc{font-size:9px;color:#718096}
+.src-card .stag{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#a0aec0;margin-top:2px}
+.proc-name{font-size:16px;font-weight:700;color:#102a43;margin-bottom:2px}
+.proc-role{font-size:9.5px;color:#718096;font-style:italic;margin-bottom:8px}
+.proc-tech{font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0;margin-bottom:8px}
+.proc-steps{list-style:none;counter-reset:step}
+.proc-steps li{counter-increment:step;font-size:9.5px;color:#1a202c;padding:2px 0;padding-left:16px;position:relative}
+.proc-steps li::before{content:counter(step)".";position:absolute;left:0;font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0}
+.highlight{background:#f0f4f8;border:1px solid #2b6cb0;padding:5px 8px;margin-top:8px;font-size:9.5px;color:#2b6cb0;font-weight:600;text-align:center;border-radius:5px}
+.schema-box{font-family:'JetBrains Mono',monospace;font-size:8px;color:#718096;background:#f0f4f8;border:1px solid #cbd5e0;padding:6px 8px;margin-bottom:6px;line-height:1.6;border-radius:5px}
+.route-btn{display:block;text-align:center;font-size:9.5px;font-weight:700;color:#102a43;border:1px solid #102a43;padding:4px;margin-top:6px;border-radius:5px;transition:box-shadow 0.2s ease}
+.route-btn:hover{box-shadow:0 2px 8px rgba(16,42,67,0.12)}
+
+/* Stepper */
+.stepper{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:8px 0;border-top:1px solid #cbd5e0}
+.stepper .dot{width:8px;height:8px;border-radius:50%;border:1.5px solid #a0aec0;background:#ffffff}
+.stepper .dot.active{background:#102a43;border-color:#102a43}
+.stepper .dot-label{font-family:'JetBrains Mono',monospace;font-size:6.5px;color:#a0aec0}
+.stepper .dot-label.active{color:#102a43;font-weight:600}
+.stepper .dot-line{width:20px;height:1px;background:#cbd5e0}
+
+/* Activity diagram (HTML) */
+.swim{display:grid;grid-template-columns:1fr 1fr 1fr 1.2fr;gap:0;border:1px solid #cbd5e0;border-radius:5px;overflow:hidden}
+.swim-header{padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;font-weight:600;color:#ffffff;border-right:1px solid rgba(255,255,255,.2)}
+.swim-cell{border-right:1px solid #cbd5e0;border-bottom:1px solid #cbd5e0;padding:4px 6px;min-height:28px;display:flex;align-items:center;justify-content:center;font-size:9px}
+.swim-cell.empty{background:#f0f4f8}
+.act-node{background:#f0f4f8;border:1px solid #2b6cb0;padding:3px 8px;font-size:9px;font-weight:600;color:#102a43;text-align:center;width:100%;border-radius:5px}
+.act-diamond{background:#ffffff;border:1px solid #102a43;padding:3px 6px;font-size:8.5px;font-weight:600;text-align:center;transform:rotate(0deg);border-radius:5px}
+.act-start{width:14px;height:14px;border-radius:50%;background:#102a43;display:inline-block}
+.act-end{width:14px;height:14px;border-radius:50%;background:#ffffff;border:2px solid #102a43;display:inline-flex;align-items:center;justify-content:center}
+.act-end::after{content:'';width:6px;height:6px;border-radius:50%;background:#102a43}
+.act-arrow{color:#a0aec0;font-size:11px;text-align:center}
+.act-reject{color:#9b2c2c;font-size:8px;font-style:italic}
+.act-note{font-size:7.5px;color:#a0aec0;font-style:italic;text-align:center}
+
+/* Problem-solution rows */
+.ps-row{display:grid;grid-template-columns:20px 1fr 30px 1fr;gap:4px;align-items:start;padding:6px 0;border-bottom:1px solid #cbd5e0;font-size:10px}
+.ps-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0}
+.ps-problem{color:#718096}
+.ps-arrow{text-align:center;color:#2b6cb0;font-weight:700}
+.ps-solution{color:#1a202c}
+
+/* Note */
+.note{font-size:8.5px;font-style:italic;color:#a0aec0;text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<div class="page cover">
+  <div class="top"></div>
+  <div class="bottom">
+    <p class="kicker">System Design Documentation · Final Year Project 2025–2026</p>
+    <h1>NEXIS</h1>
+    <p class="subtitle">Multi-Agent Autonomous Engineering Platform<br>with Closed-Loop Fault Recovery</p>
+    <div class="meta">
+      <div class="k">Programme</div><div class="v">BSc Computer Science — Final Year Project</div>
+      <div class="k">Author</div><div class="v">Ratul Sikder (2506102) — EMIT 6th Batch, IIT, University of Dhaka</div>
+      <div class="k">Document</div><div class="v">System Design Diagrams — Architecture, Step Flows & Activity</div>
+      <div class="k">Date</div><div class="v">April 2026</div>
+      <div class="k">Scope</div><div class="v">Self-Healing Loop (Layer 2) + Backend Agent + Data Engineer Agent</div>
+    </div>
+    <div class="toc">
+      <p class="toc-h">Contents</p>
+      <div class="toc-r"><span class="toc-n">00</span><span>Motivation & Problem Context</span><span class="toc-d"></span><span class="toc-s">Cost of failures, current gaps</span></div>
+      <div class="toc-r"><span class="toc-n">01</span><span>End-to-End System Flow</span><span class="toc-d"></span><span class="toc-s">6-step pipeline overview</span></div>
+      <div class="toc-r"><span class="toc-n">02</span><span>System Architecture</span><span class="toc-d"></span><span class="toc-s">Dual-layer, agents, data stores</span></div>
+      <div class="toc-r"><span class="toc-n">03</span><span>Step 1 — Intelligent Fault Detection</span><span class="toc-d"></span><span class="toc-s">Sentinel · Flink · SPC</span></div>
+      <div class="toc-r"><span class="toc-n">04</span><span>Step 2 — AI-Driven Root Cause Analysis</span><span class="toc-d"></span><span class="toc-s">Pathfinder · Neo4j · DoWhy</span></div>
+      <div class="toc-r"><span class="toc-n">05</span><span>Step 3 — LLM-Powered Patch Synthesis</span><span class="toc-d"></span><span class="toc-s">Synthesiser · Claude · LangGraph</span></div>
+      <div class="toc-r"><span class="toc-n">06</span><span>Step 4 — Autonomous Shadow Validation</span><span class="toc-d"></span><span class="toc-s">Validator · Docker · Hypothesis</span></div>
+      <div class="toc-r"><span class="toc-n">07</span><span>Step 5 — Intelligent Approval Gate</span><span class="toc-d"></span><span class="toc-s">Auto-fix known issues · Human for high-impact</span></div>
+      <div class="toc-r"><span class="toc-n">08</span><span>Step 6 — GitOps Auto-Deployment</span><span class="toc-d"></span><span class="toc-s">ArgoCD · K8s · Terraform</span></div>
+      <div class="toc-r"><span class="toc-n">09</span><span>UML Activity Diagram</span><span class="toc-d"></span><span class="toc-s">Swimlanes, decisions, rollback</span></div>
+      <div class="toc-r"><span class="toc-n">10</span><span>Technology Rationale</span><span class="toc-d"></span><span class="toc-s">Why each technology was chosen</span></div>
+      <div class="toc-r"><span class="toc-n">11</span><span>Impact Summary</span><span class="toc-d"></span><span class="toc-s">Problem→solution mapping</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2: MOTIVATION ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">00</span><span class="title">Motivation & Problem Context</span></div><span class="sub">Why autonomous fault recovery matters</span></div>
+
+  <p class="sec">The cost of software failures</p>
+  <table>
+    <tr><th>Metric</th><th>Industry Average</th><th>Source</th></tr>
+    <tr><td>Mean Time to Repair (MTTR)</td><td>4–6 hours</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">PagerDuty, 2023</td></tr>
+    <tr><td>Incidents per month (mid-size SaaS)</td><td>15–25</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">Datadog Survey</td></tr>
+    <tr><td>Cost per hour of downtime</td><td>$5,600–$9,000</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">Gartner</td></tr>
+    <tr><td>Incidents caused by deployments</td><td>~70%</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">Google SRE Book</td></tr>
+    <tr><td>Schema drift in pipeline failures</td><td>~30%</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">Monte Carlo, 2023</td></tr>
+    <tr><td>Time to identify root cause</td><td>45+ minutes</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">PagerDuty</td></tr>
+    <tr><td>Organisations with automated remediation</td><td>23%</td><td style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">Puppet State of DevOps</td></tr>
+  </table>
+
+  <p class="sec">Current approach vs. NEXIS</p>
+  <table class="comparison">
+    <tr><th style="width:50%">Manual / Current</th><th>NEXIS Automated</th></tr>
+    <tr><td style="color:#718096">Human detects via alerts (alert fatigue)</td><td>Sentinel: SPC-based auto-detection &lt; 90s</td></tr>
+    <tr><td style="color:#718096">Manual root cause analysis (45+ min)</td><td>Pathfinder: causal inference via Neo4j + DoWhy</td></tr>
+    <tr><td style="color:#718096">Human writes fix (hours–days)</td><td>Synthesiser: LLM-generated contract-compliant patches</td></tr>
+    <tr><td style="color:#718096">Manual testing before deploy (hours)</td><td>Validator: shadow replay + property-based tests</td></tr>
+    <tr><td style="color:#718096">Approval via ticket system</td><td>Smart gate: auto-fix known issues, human review only for high-impact</td></tr>
+    <tr><td style="color:#718096">Manual deploy, hope it works</td><td>ArgoCD GitOps + auto rollback &lt; 90 seconds</td></tr>
+  </table>
+
+  <p class="sec">Target impact</p>
+  <div class="metrics">
+    <div class="mbox"><div class="label">MTTR Reduction</div><div class="val">≥ 60%</div><div class="desc">From 4–6h to &lt; 2h</div></div>
+    <div class="mbox"><div class="label">Patch Correctness</div><div class="val">≥ 80%</div><div class="desc">First-try success rate</div></div>
+    <div class="mbox"><div class="label">Engineer Effort</div><div class="val">− 70%</div><div class="desc">Auto-fix known issues · Human only for high-impact</div></div>
+    <div class="mbox"><div class="label">Rollback Time</div><div class="val">&lt; 90s</div><div class="desc">Automatic if breach</div></div>
+  </div>
+
+  <div class="pf"><span>NEXIS — System Design</span><span>00 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 3: SYSTEM FLOW ============ -->
+<div class="land">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">01</span><span class="title">End-to-End System Flow</span></div><span class="sub">Complete pipeline from failure detection to deployment</span></div>
+
+  <div class="flow">
+    <div class="flow-step" style="background:#f0f4f8;max-width:80px">
+      <span class="snum">SOURCE</span>
+      <span class="sname" style="font-size:10px">Telemetry</span>
+      <span class="sagent">Kafka topics</span>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step active">
+      <span class="snum">STEP 1</span>
+      <span class="sname">DETECT</span>
+      <span class="sagent">Sentinel</span>
+      <span class="stech">Flink · Kafka · SPC</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">60s sliding window<br>Severity 1–5 scoring<br>SPC control limits</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step active">
+      <span class="snum">STEP 2</span>
+      <span class="sname">DIAGNOSE</span>
+      <span class="sagent">Pathfinder</span>
+      <span class="stech">Neo4j · DoWhy · EconML</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">Dependency graph<br>do-calculus inference<br>Root cause isolation</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step" style="border-color:#e85d26;background:#fef0e8">
+      <span class="snum">STEP 3</span>
+      <span class="sname" style="color:#e85d26">SYNTHESISE</span>
+      <span class="sagent">Synthesiser</span>
+      <span class="stech">Claude · LangGraph · Pydantic</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">LLM patch generation<br>Contract enforcement<br>2–3 candidates</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step active">
+      <span class="snum">STEP 4</span>
+      <span class="sname">VALIDATE</span>
+      <span class="sagent">Validator</span>
+      <span class="stech">Docker · Hypothesis · fast-check</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">Shadow containers<br>90-day data replay<br>Property-based tests</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step" style="border-color:#102a43">
+      <span class="snum">STEP 5</span>
+      <span class="sname">APPROVE</span>
+      <span class="sagent">Smart Gate</span>
+      <span class="stech">Severity routing</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">High impact → human review<br>Known issue → auto-fix<br>Agent assignment</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step active">
+      <span class="snum">STEP 6</span>
+      <span class="sname">DEPLOY</span>
+      <span class="sagent">DevOps</span>
+      <span class="stech">ArgoCD · K8s · Terraform</span>
+      <div style="font-size:8px;color:#718096;margin-top:4px">GitOps sync<br>Health monitoring<br>Auto rollback &lt;90s</div>
+    </div>
+    <div class="flow-arr">→</div>
+    <div class="flow-step" style="background:#f0f4f8;border-color:#2b6cb0;max-width:80px">
+      <span class="snum" style="color:#2b6cb0">OUTPUT</span>
+      <span class="sname" style="font-size:10px;color:#2b6cb0">Production</span>
+      <span class="sagent">Fix deployed</span>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:8px;color:#a0aec0">← — — — — — — Telemetry feedback loop (continuous: production health → Sentinel) — — — — — — →</div>
+
+  <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div>
+      <p class="sec" style="margin-top:0">Layer 2 — Self-Healing Loop (autonomous)</p>
+      <p style="font-size:10.5px;color:#718096;line-height:1.5">Steps 1–4 execute without human intervention. The Sentinel monitors live telemetry, Pathfinder traces the causal graph, Synthesiser generates contract-compliant patches via LLM, and Validator tests each candidate in a fully isolated shadow environment with 90-day data replay.</p>
+    </div>
+    <div>
+      <p class="sec" style="margin-top:0">Human gate + Deployment</p>
+      <p style="font-size:10.5px;color:#718096;line-height:1.5">Step 5 uses intelligent routing: known low-severity issues are auto-approved and assigned directly to the appropriate agent. Only high-impact or unknown patterns require human review. Upon approval, Step 6 deploys via ArgoCD GitOps with automatic rollback if health metrics breach thresholds within 90 seconds.</p>
+    </div>
+  </div>
+
+  <p class="note">Steps 1–4 are fully autonomous (Layer 2 Self-Healing Loop) · Step 5 is the only human step · Step 6 closes the feedback loop back to Sentinel</p>
+  <div class="pf"><span>NEXIS — System Design</span><span>01 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 4: ARCHITECTURE ============ -->
+<div class="land">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">02</span><span class="title">System Architecture</span></div><span class="sub">Dual-layer multi-agent architecture with shared message bus</span></div>
+
+  <div style="display:grid;grid-template-columns:110px 1fr 150px;gap:10px">
+    <!-- LEFT: Input Sources -->
+    <div style="border:1px solid #cbd5e0;padding:8px;border-radius:5px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:#a0aec0;margin-bottom:8px;text-align:center">Input Sources</div>
+      <div class="src-card"><div class="sname" style="font-size:9px">Kafka</div><div class="sdesc">Event streaming</div></div>
+      <div class="src-card"><div class="sname" style="font-size:9px">Flink</div><div class="sdesc">Stream processing</div></div>
+      <div class="src-card"><div class="sname" style="font-size:9px">OpenLineage</div><div class="sdesc">Data lineage</div></div>
+      <div class="src-card"><div class="sname" style="font-size:9px">dbt</div><div class="sdesc">Transforms</div></div>
+      <div class="src-card"><div class="sname" style="font-size:9px">Airflow</div><div class="sdesc">Orchestration</div></div>
+    </div>
+
+    <!-- CENTER: Layers -->
+    <div>
+      <!-- Layer 2 -->
+      <div style="border:1px solid #2b6cb0;background:#f0f4f8;padding:8px;margin-bottom:6px;border-radius:5px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;color:#102a43;font-weight:600;margin-bottom:6px">LAYER 2 — SELF-HEALING LOOP</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+          <div class="agent-card">
+            <div class="aname" style="color:#102a43">Sentinel</div>
+            <div class="arole">Fault Detection</div>
+            <div class="atech">Flink · Kafka · SPC</div>
+            <div class="aio"><span class="lbl in">IN</span> Kafka telemetry</div>
+            <div class="aio"><span class="lbl out">OUT</span> Fault report</div>
+            <div class="aschema">{component, type, severity, confidence}</div>
+          </div>
+          <div class="agent-card">
+            <div class="aname" style="color:#102a43">Pathfinder</div>
+            <div class="arole">Root Cause Analysis</div>
+            <div class="atech">Neo4j · DoWhy · OpenLineage</div>
+            <div class="aio"><span class="lbl in">IN</span> Fault report</div>
+            <div class="aio"><span class="lbl out">OUT</span> Root cause list</div>
+            <div class="aschema">{hypotheses[], causal_path, confidence}</div>
+          </div>
+          <div class="agent-card">
+            <div class="aname accent">Synthesiser</div>
+            <div class="arole">Patch Generation</div>
+            <div class="atech">Claude · LangGraph · Pydantic</div>
+            <div class="aio"><span class="lbl in">IN</span> Hypotheses + contracts</div>
+            <div class="aio"><span class="lbl out">OUT</span> Patch candidates</div>
+            <div class="aschema">{diff, explanation, confidence, target}</div>
+          </div>
+          <div class="agent-card">
+            <div class="aname" style="color:#102a43">Validator</div>
+            <div class="arole">Shadow Validation</div>
+            <div class="atech">Docker · Hypothesis · fast-check</div>
+            <div class="aio"><span class="lbl in">IN</span> Patches + tests</div>
+            <div class="aio"><span class="lbl out">OUT</span> Validated patch</div>
+            <div class="aschema">{patch, results, pass_rate, audit}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Bus -->
+      <div style="text-align:center;padding:5px;background:#f0f4f8;border:1px solid #cbd5e0;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#718096;border-radius:5px">Pydantic Message Bus · Chroma Vector Store · PostgreSQL Audit Log · Contract Registry</div>
+
+      <!-- Layer 1 -->
+      <div style="border:1px solid #2b6cb0;background:#f0f4f8;padding:8px;margin-bottom:6px;border-radius:5px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;color:#2b6cb0;font-weight:600;margin-bottom:6px">LAYER 1 — EXECUTION TEAM</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+          <div class="agent-card">
+            <div class="aname" style="color:#2b6cb0">Backend Agent</div>
+            <div class="arole">Code generation, bug repair</div>
+            <div class="atech">GitHub · Claude</div>
+          </div>
+          <div class="agent-card">
+            <div class="aname" style="color:#2b6cb0">Data Engineer</div>
+            <div class="arole">Schema migration, pipeline repair</div>
+            <div class="atech">Airflow · dbt</div>
+          </div>
+          <div class="agent-card"><div class="aname" style="color:#2b6cb0">Architect</div><div class="arole">Architecture decisions</div></div>
+          <div class="agent-card"><div class="aname" style="color:#2b6cb0">QA Agent</div><div class="arole">Test generation</div></div>
+          <div class="agent-card"><div class="aname" style="color:#2b6cb0">DevOps Agent</div><div class="arole">Deployment & monitoring</div></div>
+        </div>
+      </div>
+
+      <!-- Data Stores -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+        <div style="border:1px solid #cbd5e0;padding:5px 8px;text-align:center;border-radius:5px"><div style="font-size:10px;font-weight:600;color:#102a43">PostgreSQL</div><div style="font-size:8px;color:#718096">Audit log · State</div></div>
+        <div style="border:1px solid #cbd5e0;padding:5px 8px;text-align:center;border-radius:5px"><div style="font-size:10px;font-weight:600;color:#102a43">Chroma</div><div style="font-size:8px;color:#718096">Vector memory</div></div>
+        <div style="border:1px solid #cbd5e0;padding:5px 8px;text-align:center;border-radius:5px"><div style="font-size:10px;font-weight:600;color:#102a43">Contract Registry</div><div style="font-size:8px;color:#718096">API + data schemas</div></div>
+        <div style="border:1px solid #cbd5e0;padding:5px 8px;text-align:center;border-radius:5px"><div style="font-size:10px;font-weight:600;color:#102a43">Neo4j</div><div style="font-size:8px;color:#718096">Dependency graph</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Output -->
+    <div style="border:1px solid #cbd5e0;padding:8px;border-radius:5px">
+      <div style="border:1px solid #102a43;padding:8px;margin-bottom:6px;text-align:center;border-radius:5px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:#718096;text-transform:uppercase;letter-spacing:.1em">Human Gate</div>
+        <div style="font-size:12px;font-weight:700;margin:4px 0;color:#102a43">Engineer</div>
+        <div style="font-size:8.5px;color:#718096;font-style:italic">Approval · &lt;10 min</div>
+      </div>
+      <div style="border:1px solid #2b6cb0;padding:8px;margin-bottom:6px;text-align:center;border-radius:5px">
+        <div style="font-size:10px;font-weight:700;color:#2b6cb0">Kubernetes</div>
+        <div style="font-size:8px;color:#718096">ArgoCD GitOps</div>
+        <div style="font-size:8px;color:#718096">Auto rollback &lt;90s</div>
+      </div>
+      <div style="border:1px solid #2b6cb0;background:#f0f4f8;padding:8px;border-radius:5px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:#2b6cb0;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Outputs</div>
+        <div style="font-size:8.5px;color:#1a202c;line-height:1.6">✓ Fix deployed<br>✓ Health report<br>✓ Audit trail<br>✓ Telemetry → Sentinel<br>✓ Auto rollback log</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Arrows flow left → right through Layer 2, down through message bus, Layer 1 agents execute delegated tasks, right side shows human gate + deployment</p>
+  <div class="pf"><span>NEXIS — System Design</span><span>02 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 5: STEP 1 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">03</span><span class="title">Step 1 — Intelligent Fault Detection</span></div><span class="sub">Sentinel · Flink · Kafka · SPC</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">Apache Kafka</div><div class="sdesc">Event streaming, pub/sub</div><div class="stag">latency · error rates · throughput</div></div>
+      <div class="src-card"><div class="sname">Apache Flink</div><div class="sdesc">Stream processing engine</div><div class="stag">sliding window: 60 seconds</div></div>
+      <div class="src-card"><div class="sname">OpenLineage</div><div class="sdesc">Data lineage events</div><div class="stag">schema drift signals</div></div>
+      <div class="src-card"><div class="sname">DevOps Agent</div><div class="sdesc">Runtime health feed</div><div class="stag">resource utilisation</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process">Process — Sentinel</h4>
+      <div class="proc-name">Sentinel</div>
+      <div class="proc-role">Fault Detection Agent</div>
+      <div class="proc-tech">Flink · Kafka · SPC · Pydantic</div>
+      <ol class="proc-steps">
+        <li>Receives telemetry via Kafka consumer</li>
+        <li>Applies 60-second Flink sliding window</li>
+        <li>Computes UCL / LCL control limits</li>
+        <li>Detects breach → classifies failure type</li>
+        <li>Assigns severity (1–5) and confidence</li>
+        <li>Emits Pydantic schema to Pathfinder</li>
+      </ol>
+      <div class="highlight">Target: detection &lt; 90 seconds</div>
+      <div style="font-size:8.5px;color:#718096;margin-top:6px;text-align:center">Failure classes: schema drift · API violations<br>dependency breakage · deployment regressions</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — Fault Report</h4>
+      <div style="font-size:9px;color:#718096;font-style:italic;margin-bottom:6px">Pydantic schema</div>
+      <div class="schema-box">component: str<br>failure_type: enum<br>severity: int(1..5)<br>confidence: float<br>timestamp: datetime<br>context: dict</div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 4px">Example:</div>
+      <div class="schema-box">component: "etl_orders"<br>failure_type: "schema_drift"<br>confidence: 0.94<br>severity: 4</div>
+      <div class="route-btn">→ Pathfinder</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot active"></span><span class="dot-label active">1 Detect</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">4 Validate</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">5 Approve</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>03 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 6: STEP 2 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">04</span><span class="title">Step 2 — AI-Driven Root Cause Analysis</span></div><span class="sub">Pathfinder · Neo4j · DoWhy / EconML · OpenLineage</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">Fault Report</div><div class="sdesc">From Sentinel</div><div class="stag">{component, type, severity, confidence}</div></div>
+      <div class="src-card"><div class="sname">Neo4j Graph DB</div><div class="sdesc">Service dependency graph</div><div class="stag">OpenLineage metadata</div></div>
+      <div class="src-card"><div class="sname">DoWhy / EconML</div><div class="sdesc">Causal inference framework</div><div class="stag">counterfactual analysis</div></div>
+      <div class="src-card"><div class="sname">Architect ADRs</div><div class="sdesc">Design records</div><div class="stag">architecture context</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process">Process — Pathfinder</h4>
+      <div class="proc-name">Pathfinder</div>
+      <div class="proc-role">Root Cause Analysis Agent</div>
+      <div class="proc-tech">Neo4j · DoWhy · EconML · OpenLineage · Pydantic</div>
+      <ol class="proc-steps">
+        <li>Receives fault report from Sentinel</li>
+        <li>Loads dependency graph from Neo4j</li>
+        <li>Applies do-calculus causal inference</li>
+        <li>Separates root cause from symptoms</li>
+        <li>Ranks hypotheses by confidence</li>
+        <li>Sends ranked list to Synthesiser</li>
+      </ol>
+      <div class="highlight">Causal graph traversal + counterfactual analysis</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — Root Cause Report</h4>
+      <div style="font-size:9px;color:#718096;font-style:italic;margin-bottom:6px">Pydantic schema</div>
+      <div class="schema-box">hypotheses: list<br>causal_path: graph<br>confidence[]: float<br>symptoms[]: list</div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 4px">Example:</div>
+      <div class="schema-box">hypotheses:<br>&nbsp; 1. schema_drift (0.94) ←root<br>&nbsp; 2. upstream_api (0.43)<br>symptoms: [3 nodes]</div>
+      <div class="route-btn">→ Synthesiser</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot"></span><span class="dot-label">1 Detect</span><span class="dot-line"></span>
+    <span class="dot active"></span><span class="dot-label active">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">4 Validate</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">5 Approve</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>04 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 7: STEP 3 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">05</span><span class="title">Step 3 — LLM-Powered Patch Synthesis</span></div><span class="sub">Synthesiser · Claude · LangGraph · Pydantic · Contract Registry</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">Hypotheses</div><div class="sdesc">From Pathfinder</div><div class="stag">ranked by confidence</div></div>
+      <div class="src-card"><div class="sname">Contract Registry</div><div class="sdesc">Architect-owned API schemas</div><div class="stag">hard constraints</div></div>
+      <div class="src-card"><div class="sname">Chroma</div><div class="sdesc">Vector memory</div><div class="stag">past patches (semantic search)</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process">Process — Synthesiser</h4>
+      <div class="proc-name">Synthesiser</div>
+      <div class="proc-role">Patch Generation Agent</div>
+      <div class="proc-tech">Claude · LangGraph · Pydantic · Chroma</div>
+      <ol class="proc-steps">
+        <li>Takes top-ranked hypothesis</li>
+        <li>Loads applicable API contracts</li>
+        <li>Queries Chroma for past similar patches</li>
+        <li>Prompts LLM with constraints + evidence</li>
+        <li>Validates candidates against contracts</li>
+        <li>Delegates to Backend / Data Engineer</li>
+      </ol>
+      <div class="highlight" style="background:#fef0e8;border-color:#f0c4a8;color:#e85d26">★ Primary research challenge</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — Patch Candidates</h4>
+      <div style="font-size:9px;color:#718096;font-style:italic;margin-bottom:6px">2–3 ranked patches</div>
+      <div class="schema-box">diff: str (code patch)<br>explanation: str<br>confidence: float<br>target_agent: enum</div>
+      <div style="font-size:9px;font-weight:600;margin:8px 0 4px">Delegated to:</div>
+      <div style="border:1px solid #2b6cb0;padding:4px 8px;font-size:9px;margin-bottom:4px;border-radius:5px"><strong>Backend Agent</strong> — code-level fixes</div>
+      <div style="border:1px solid #2b6cb0;padding:4px 8px;font-size:9px;margin-bottom:6px;border-radius:5px"><strong>Data Engineer</strong> — schema fixes</div>
+      <div class="route-btn">→ Validator</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot"></span><span class="dot-label">1 Detect</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot active"></span><span class="dot-label active">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">4 Validate</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">5 Approve</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>05 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 8: STEP 4 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">06</span><span class="title">Step 4 — Autonomous Shadow Validation</span></div><span class="sub">Validator · Docker · Hypothesis · fast-check · 90-day replay</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">Patch Candidates</div><div class="sdesc">From Synthesiser</div><div class="stag">2–3 ranked patches + diffs</div></div>
+      <div class="src-card"><div class="sname">QA Test Suites</div><div class="sdesc">From QA Agent</div><div class="stag">auto-generated, property-based</div></div>
+      <div class="src-card"><div class="sname">Historical Data</div><div class="sdesc">90-day replay set</div><div class="stag">immutable PostgreSQL snapshot</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process">Process — Validator</h4>
+      <div class="proc-name">Validator</div>
+      <div class="proc-role">Shadow Execution Agent</div>
+      <div class="proc-tech">Docker · Hypothesis · fast-check</div>
+      <ol class="proc-steps">
+        <li>Deploys each patch to isolated container</li>
+        <li>Replays 90-day historical data</li>
+        <li>Executes property-based test suites</li>
+        <li>Compares output vs. invariants</li>
+        <li>Ranks candidates by pass rate</li>
+        <li>Promotes best patch to approval queue</li>
+      </ol>
+      <div class="highlight">Shadow ≠ production · fully air-gapped</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — Validated Patch</h4>
+      <div style="font-size:9px;color:#718096;font-style:italic;margin-bottom:6px">Best candidate selected</div>
+      <div class="schema-box">patch: code_diff<br>test_results: report<br>pass_rate: float<br>explanation: str<br>audit_trace: list</div>
+      <div style="font-size:9px;font-weight:600;margin:8px 0 4px">Approval package includes:</div>
+      <div style="font-size:9px;color:#718096;line-height:1.5">• Patch diff (code changes)<br>• Plain-English explanation<br>• Test report + pass rate<br>• Full audit trail</div>
+      <div class="route-btn" style="color:#102a43;border-color:#102a43">→ Engineer (human)</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot"></span><span class="dot-label">1 Detect</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot active"></span><span class="dot-label active">4 Validate</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">5 Approve</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>06 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 9: STEP 5 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">07</span><span class="title">Step 5 — Intelligent Approval Gate</span></div><span class="sub">Severity-based routing · Auto-fix for known issues · Human review for high-impact</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">ValidatedPatch</div><div class="sdesc">From Validator</div><div class="stag">patch diff + test report + audit trail</div></div>
+      <div class="src-card"><div class="sname">Impact Assessment</div><div class="sdesc">From Sentinel severity score</div><div class="stag">severity 1–5 · confidence · blast radius</div></div>
+      <div class="src-card"><div class="sname">Historical Match</div><div class="sdesc">From Chroma similarity</div><div class="stag">known pattern? · past fix success rate</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process" style="color:#102a43;border-color:#102a43">Decision — Smart Routing</h4>
+      <div class="proc-name" style="color:#102a43">Approval Gate</div>
+      <div class="proc-role">Severity-based intelligent routing</div>
+      <div style="margin:8px 0">
+        <div style="text-align:center;border:1.5px solid #102a43;padding:6px;margin:0 10px;border-radius:5px">
+          <div style="font-size:11px;font-weight:700;margin-bottom:4px;color:#102a43">Impact Level?</div>
+          <div style="display:flex;gap:6px;font-size:8.5px">
+            <div style="flex:1;background:#fff5f5;border:1px solid #e8c4c4;border-radius:5px;padding:4px;text-align:center">
+              <div style="font-weight:700;color:#9b2c2c">HIGH IMPACT</div>
+              <div style="color:#718096;margin-top:2px">Severity 4–5<br>Unknown pattern<br>Critical service</div>
+              <div style="color:#9b2c2c;font-weight:600;margin-top:3px">→ Engineer reviews<br>enters incident report</div>
+            </div>
+            <div style="flex:1;background:#f0f4f8;border:1px solid #2b6cb0;border-radius:5px;padding:4px;text-align:center">
+              <div style="font-weight:700;color:#2b6cb0">KNOWN / LOW</div>
+              <div style="color:#718096;margin-top:2px">Severity 1–3<br>Known pattern<br>High confidence fix</div>
+              <div style="color:#2b6cb0;font-weight:600;margin-top:3px">→ Auto-approved<br>assigns agent directly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:8px;color:#718096;text-align:center;font-style:italic">All decisions logged to PostgreSQL · auto-approvals flagged for async review</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — Routing Decision</h4>
+      <div style="font-size:9px;color:#718096;font-style:italic;margin-bottom:6px">Logged + actioned</div>
+      <div class="schema-box">decision: approved | review<br>route: auto | human<br>severity: int<br>agent: target_agent<br>timestamp: datetime</div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 3px;color:#9b2c2c">High impact path:</div>
+      <div style="font-size:8.5px;color:#718096">Engineer reviews diff + explanation, enters incident report, then approves → DevOps</div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 3px;color:#2b6cb0">Known issue path:</div>
+      <div style="font-size:8.5px;color:#718096">Auto-approved → assigns Backend or Data Engineer agent → DevOps deploys</div>
+      <div class="route-btn" style="color:#2b6cb0;border-color:#2b6cb0">→ DevOps Agent</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot"></span><span class="dot-label">1 Detect</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">4 Validate</span><span class="dot-line"></span>
+    <span class="dot active"></span><span class="dot-label active">5 Approve</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>07 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 10: STEP 6 ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">08</span><span class="title">Step 6 — GitOps Auto-Deployment & Monitoring</span></div><span class="sub">DevOps · GitHub Actions · ArgoCD · Kubernetes · Terraform</span></div>
+
+  <div class="step-grid">
+    <div class="step-col">
+      <h4>Input</h4>
+      <div class="src-card"><div class="sname">Approval Decision</div><div class="sdesc">From Engineer</div><div class="stag">approved patch + metadata</div></div>
+      <div class="src-card"><div class="sname">ArgoCD</div><div class="sdesc">GitOps CD pipeline</div><div class="stag">declarative K8s sync</div></div>
+      <div class="src-card"><div class="sname">Terraform</div><div class="sdesc">Infrastructure as Code</div><div class="stag">cluster provisioning</div></div>
+    </div>
+    <div class="step-col">
+      <h4 class="process" style="color:#102a43;border-color:#102a43">Process — DevOps Agent</h4>
+      <div class="proc-name" style="color:#102a43">DevOps Agent</div>
+      <div class="proc-role">Deployment & Monitoring</div>
+      <div class="proc-tech">GitHub Actions · ArgoCD · Kubernetes · Terraform</div>
+      <ol class="proc-steps">
+        <li>Receives approved patch from Engineer</li>
+        <li>Triggers GitHub Actions CI pipeline</li>
+        <li>ArgoCD syncs manifest to Kubernetes</li>
+        <li>Monitors post-deploy health signals</li>
+        <li>If breach detected → auto rollback in 90s</li>
+        <li>Streams telemetry back to Sentinel</li>
+      </ol>
+      <div class="highlight" style="background:#f0f4f8;border-color:#2b6cb0;color:#102a43">Rollback target: &lt; 90 seconds</div>
+      <div style="font-size:8.5px;color:#718096;margin-top:6px;text-align:center">Closes the loop: telemetry → Sentinel</div>
+    </div>
+    <div class="step-col">
+      <h4 class="output">Output — System Outputs</h4>
+      <div style="font-size:9px;color:#1a202c;line-height:1.7;margin-bottom:8px">✓ Fix deployed to production<br>✓ Post-deploy health report<br>✓ Full audit trail<br>✓ Telemetry → Sentinel<br><span style="color:#9b2c2c">⚠ Auto rollback if breach</span></div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 4px">Performance targets:</div>
+      <div class="schema-box">MTTR: −60%<br>Patch correct: ≥80%<br>Rollback: &lt; 90s<br>Approval: &lt; 10 min</div>
+      <div style="font-size:9px;font-weight:600;margin:6px 0 4px">Feedback loop:</div>
+      <div style="font-size:9px;color:#718096">Health telemetry streams continuously to Sentinel, completing the closed self-healing loop.</div>
+    </div>
+  </div>
+
+  <div class="stepper">
+    <span class="dot"></span><span class="dot-label">1 Detect</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">2 Diagnose</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">3 Synthesise</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">4 Validate</span><span class="dot-line"></span>
+    <span class="dot"></span><span class="dot-label">5 Approve</span><span class="dot-line"></span>
+    <span class="dot active"></span><span class="dot-label active">6 Deploy</span>
+  </div>
+  <div class="pf"><span>NEXIS — System Design</span><span>08 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 11: ACTIVITY DIAGRAM ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">09</span><span class="title">UML Activity Diagram</span></div><span class="sub">End-to-end flow · swimlanes · decisions · rollback</span></div>
+
+  <div class="swim">
+    <!-- Headers -->
+    <div class="swim-header" style="background:#102a43">LAYER 2</div>
+    <div class="swim-header" style="background:#2b6cb0">LAYER 1</div>
+    <div class="swim-header" style="background:#102a43">ENGINEER</div>
+    <div class="swim-header" style="background:#2b6cb0;border-right:none">PRODUCTION</div>
+
+    <!-- Row 1: Start -->
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><span class="act-start"></span>&nbsp; Production failure occurs</div>
+
+    <!-- Row 2 -->
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><div class="act-node" style="background:#f0f4f8;color:#2b6cb0;border-color:#2b6cb0">Emit telemetry</div></div>
+
+    <!-- Row 3 -->
+    <div class="swim-cell"><div class="act-node">Sentinel detects</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><div class="act-arrow">↑ Kafka stream</div></div>
+
+    <!-- Row 4: Decision -->
+    <div class="swim-cell"><div class="act-diamond">Anomaly? <span style="font-weight:400;font-size:7px"><br>No → monitor</span></div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 5 -->
+    <div class="swim-cell"><div class="act-node">Emit fault report</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 6 -->
+    <div class="swim-cell"><div class="act-node">Pathfinder diagnoses</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 7 -->
+    <div class="swim-cell"><div class="act-node">Synthesiser generates</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 8: Fork -->
+    <div class="swim-cell"><div style="height:3px;background:#102a43;width:100%"></div><div class="act-note">fork — delegate</div></div>
+    <div class="swim-cell"><div class="act-node" style="background:#f0f4f8;color:#2b6cb0;border-color:#2b6cb0">Backend applies + DataEng fixes</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 9: Join + QA -->
+    <div class="swim-cell"><div style="height:3px;background:#102a43;width:100%"></div><div class="act-note">join</div></div>
+    <div class="swim-cell"><div class="act-note">QA supplies test suites →</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 10: Validator -->
+    <div class="swim-cell"><div class="act-node">Validator shadow test</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 11: Tests pass? -->
+    <div class="swim-cell"><div class="act-diamond">Tests pass? <span style="font-weight:400;font-size:7px"><br><span class="act-reject">No → re-synth</span></span></div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+
+    <!-- Row 12: Queue -->
+    <div class="swim-cell"><div class="act-node">Queue for approval</div></div>
+    <div class="swim-cell empty"></div>
+    <div class="swim-cell"><div class="act-diamond">Approve? <span style="font-weight:400;font-size:7px"><br><span class="act-reject">Reject → back</span></span></div></div>
+    <div class="swim-cell empty"></div>
+
+    <!-- Row 13: Deploy -->
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><div class="act-node" style="background:#f0f4f8;color:#2b6cb0;border-color:#2b6cb0">Deploy to K8s</div></div>
+
+    <!-- Row 14: Health -->
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><div class="act-diamond">Healthy? <span style="font-weight:400;font-size:7px"><br><span class="act-reject">No → rollback</span></span></div></div>
+
+    <!-- Row 15: End -->
+    <div class="swim-cell"><div class="act-note">← telemetry feedback (continuous)</div></div>
+    <div class="swim-cell empty"></div><div class="swim-cell empty"></div>
+    <div class="swim-cell"><span class="act-end"></span>&nbsp; Incident resolved</div>
+  </div>
+
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:8px;color:#718096;justify-content:center;flex-wrap:wrap">
+    <span><span class="act-start" style="width:8px;height:8px;display:inline-block;vertical-align:middle"></span> start</span>
+    <span><span class="act-end" style="width:8px;height:8px;display:inline-flex;vertical-align:middle"></span> end</span>
+    <span style="color:#102a43">█</span> action
+    <span>◇ decision</span>
+    <span>━ fork/join</span>
+    <span style="color:#9b2c2c">reject/rollback</span>
+  </div>
+
+  <p class="note">Steps 1–4 autonomous (Layer 2) · Step 5 human gate · rollback in red · telemetry feeds back continuously</p>
+  <div class="pf"><span>NEXIS — System Design</span><span>09 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 12: TECH RATIONALE ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">10</span><span class="title">Technology Stack Rationale</span></div><span class="sub">Why each technology was chosen</span></div>
+
+  <table>
+    <tr><th>Component</th><th>Technology</th><th>Justification</th></tr>
+    <tr><td>Stream Processing</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Apache Flink</td><td>Sub-second latency, exactly-once semantics, native sliding windows for SPC</td></tr>
+    <tr><td>Event Bus</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Apache Kafka</td><td>Industry standard durable log, schema registry integration, pub/sub</td></tr>
+    <tr><td>Anomaly Detection</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">SPC</td><td>Mathematical foundation (Shewhart), interpretable UCL/LCL control limits</td></tr>
+    <tr><td>Graph Database</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Neo4j</td><td>Native graph traversal for dependency analysis, Cypher query language</td></tr>
+    <tr><td>Causal Inference</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">DoWhy / EconML</td><td>Microsoft's causal framework, do-calculus implementation, counterfactuals</td></tr>
+    <tr><td>Data Lineage</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">OpenLineage</td><td>Open standard, captures schema + dependency metadata automatically</td></tr>
+    <tr><td>LLM</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Claude (Anthropic)</td><td>Strong code generation, function calling, safety alignment, long context</td></tr>
+    <tr><td>Agent Framework</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">LangGraph</td><td>Stateful multi-agent orchestration, conditional edges, checkpoints</td></tr>
+    <tr><td>Contracts</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Pydantic</td><td>Type-safe schemas, runtime validation, JSON serialisation</td></tr>
+    <tr><td>Shadow Execution</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Docker</td><td>Process isolation, reproducible environments, fast teardown</td></tr>
+    <tr><td>Property Testing</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Hypothesis / fast-check</td><td>Auto-generates edge cases, finds invariant violations automatically</td></tr>
+    <tr><td>CI/CD</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">GitHub Actions</td><td>Native Git integration, matrix builds, marketplace ecosystem</td></tr>
+    <tr><td>GitOps</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">ArgoCD</td><td>Declarative K8s sync, auto-rollback, drift detection</td></tr>
+    <tr><td>Infrastructure</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Terraform</td><td>Reproducible infrastructure, state management, multi-cloud</td></tr>
+    <tr><td>Orchestration</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Kubernetes</td><td>Container orchestration, health checks, rolling updates, self-healing</td></tr>
+    <tr><td>Audit Store</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">PostgreSQL</td><td>ACID compliance, append-only audit patterns, mature ecosystem</td></tr>
+    <tr><td>Vector Memory</td><td style="font-family:'JetBrains Mono',monospace;font-size:9px">Chroma</td><td>Lightweight vector DB, semantic similarity for past-patch retrieval</td></tr>
+  </table>
+
+  <p style="font-size:10px;color:#718096;line-height:1.55;margin-top:10px;border-top:1px solid #cbd5e0;padding-top:10px">Technology selection prioritised three criteria: <strong>(1) production readiness</strong> — all components are battle-tested in industry; <strong>(2) interoperability</strong> — standard protocols and open APIs between layers; and <strong>(3) observability</strong> — every component emits structured telemetry for the self-healing loop.</p>
+
+  <div class="pf"><span>NEXIS — System Design</span><span>10 / 11</span></div>
+</div>
+
+<!-- ============ PAGE 13: IMPACT ============ -->
+<div class="page">
+  <div class="ph"><div style="display:flex;align-items:baseline;gap:8px"><span class="num">11</span><span class="title">Impact Summary</span></div><span class="sub">How NEXIS solves each problem</span></div>
+
+  <p class="sec" style="margin-top:0">Problem → NEXIS Solution</p>
+  <div class="ps-row"><div class="ps-num">1</div><div class="ps-problem">Alert fatigue: 15–25 incidents/month overwhelm engineers</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>Sentinel</strong> filters noise via SPC, only escalates true anomalies with confidence scores</div></div>
+  <div class="ps-row"><div class="ps-num">2</div><div class="ps-problem">Slow root cause: 45+ minutes manual investigation</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>Pathfinder</strong> uses causal graph traversal + do-calculus in seconds, not minutes</div></div>
+  <div class="ps-row"><div class="ps-num">3</div><div class="ps-problem">Manual patch writing takes hours to days</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>Synthesiser</strong> generates contract-compliant patches via LLM, constrained by Architect schemas</div></div>
+  <div class="ps-row"><div class="ps-num">4</div><div class="ps-problem">Untested hotfixes shipped under time pressure</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>Validator</strong> runs 90-day replay + property-based tests in fully isolated shadow containers</div></div>
+  <div class="ps-row"><div class="ps-num">5</div><div class="ps-problem">Every fix requires human approval (bottleneck)</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>Smart Gate</strong> auto-approves known low-severity issues; only routes high-impact to human engineer with incident report</div></div>
+  <div class="ps-row"><div class="ps-num">6</div><div class="ps-problem">Deployment risk and manual rollback (15–30 min)</div><div class="ps-arrow">→</div><div class="ps-solution"><strong>DevOps Agent</strong> deploys via ArgoCD GitOps with automatic rollback &lt; 90 seconds</div></div>
+  <div class="ps-row" style="border-bottom:none"><div class="ps-num">7</div><div class="ps-problem">No audit trail for incident response decisions</div><div class="ps-arrow">→</div><div class="ps-solution">Every step logged to <strong>PostgreSQL</strong> with full provenance chain from detection to deployment</div></div>
+
+  <p class="sec">Performance targets</p>
+  <table>
+    <tr><th>Metric</th><th>Industry Baseline</th><th>NEXIS Target</th></tr>
+    <tr><td>Mean Time to Repair</td><td style="color:#718096">4–6 hours</td><td style="font-weight:600">< 2 hours (≥60% reduction)</td></tr>
+    <tr><td>Patch Correctness (first try)</td><td style="color:#718096">~40%</td><td style="font-weight:600">≥ 80%</td></tr>
+    <tr><td>Engineer Effort per Incident</td><td style="color:#718096">2–4 hours</td><td style="font-weight:600">0 min (auto-fix) or &lt;10 min (high-impact review)</td></tr>
+    <tr><td>Rollback Time</td><td style="color:#718096">15–30 minutes</td><td style="font-weight:600">< 90 seconds (automatic)</td></tr>
+    <tr><td>Audit Coverage</td><td style="color:#718096">Partial / manual</td><td style="font-weight:600">100% automated provenance</td></tr>
+  </table>
+
+  <div style="margin-top:12px;padding:12px 14px;border:1px solid #cbd5e0;background:#f0f4f8;border-radius:5px">
+    <p style="font-size:10.5px;color:#1a202c;line-height:1.55"><strong>Research contribution:</strong> NEXIS demonstrates that a dual-layer multi-agent architecture — with role-specialised collaborative agents (Layer 1) and an autonomous self-healing loop (Layer 2) — can achieve reliable end-to-end software engineering automation. The primary research challenge is Step 3 (Synthesiser): generating a correct, safe fix for a software failure the system has never seen before, using only failure evidence and the system's own design contracts.</p>
+  </div>
+
+  <div class="pf"><span>NEXIS — System Design</span><span>11 / 11</span></div>
+</div>
+
+</body>
+</html>
